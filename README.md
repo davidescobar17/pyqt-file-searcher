@@ -2,6 +2,10 @@
 
 Application which allows the user to search files by name within a chosen directory. Display files and folders in a tree view structure with their details.
 
+## Demo
+
+![demo](./demo/demo.gif)
+
 ## Built With
   - PyQt5
 
