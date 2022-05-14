@@ -1,8 +1,8 @@
-# This Python file uses the following encoding: utf-8
 import sys
 from PyQt5.QtCore import QDir
 from PyQt5.QtWidgets import (QMainWindow, QWidget, QTreeView, QFileSystemModel,
-    QGridLayout, QApplication)
+    QGridLayout, QApplication, QLabel, QComboBox, QPushButton, QSizePolicy,
+    QGridLayout, QHBoxLayout)
 from PyQt5.QtGui import QKeySequence
 
 
@@ -27,9 +27,26 @@ class MainWindow(QMainWindow):
 
                 Layout = QGridLayout()
 
-                Layout.addWidget(self.treeView)
+                filterLabel = QLabel("Name contains:")
+                Layout.addWidget(filterLabel, 0, 0)
+                self.filterComboBox = QComboBox(self)
+                self.filterComboBox.setEditable(True)
+                self.filterComboBox.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Preferred)
+                Layout.addWidget(self.filterComboBox, 0, 1)
+
+                Layout.addWidget(self.treeView, 1, 0, 1, 2)
+
+                buttonsLayout = QHBoxLayout()
+                buttonsLayout.addStretch()
+                self.findButton = QPushButton('Find', self)
+                self.findButton.clicked.connect(self.find)
+                buttonsLayout.addWidget(self.findButton)
+                Layout.addLayout(buttonsLayout, 2, 0, 1, 2)
 
                 widget.setLayout(Layout)
+
+        def find(self):
+            self.fileSystemModel.setNameFilters(["*" + self.filterComboBox.currentText() + "*"])
 
 
 if __name__ == '__main__':
