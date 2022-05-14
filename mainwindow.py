@@ -22,6 +22,7 @@ class MainWindow(QMainWindow):
                 self.fileSystemModel.setNameFilterDisables(False)
                 root = self.fileSystemModel.setRootPath("/")
                 self.treeView.setModel(self.fileSystemModel)
+                self.treeView.setColumnWidth(0, 250)
                 self.treeView.setRootIndex(root)
 
                 Layout = QGridLayout()
